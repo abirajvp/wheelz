@@ -18,7 +18,7 @@ class Gearbox(models.Model):
 
 class Car(models.Model):
     name = models.CharField(max_length=100)
-    vechicle_id = models.CharField(max_length=50, unique=True)
+    vehicle_id = models.CharField(max_length=32)
     used_car = models.BooleanField(default=False)
     new_car = models.BooleanField(default=False)
     automatic = models.BooleanField(default=False)
@@ -40,6 +40,7 @@ class Car(models.Model):
     color = models.CharField(max_length=64, default="No Information")
     registration_date = models.CharField(default="No Information")
     image = models.ImageField(upload_to='car_images/')
+    image_src = models.TextField(null=True, blank=True)
     year = models.CharField(default="No Information")
     owner_name = models.CharField(max_length=128, default="No Information")
     owner_phone = models.CharField(max_length=32, default="No Information")

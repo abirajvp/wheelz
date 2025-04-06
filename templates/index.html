@@ -21,7 +21,7 @@
     </head>
     
     <body>
-    
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" disabled>
     <!-- ***** Preloader Start ***** -->
     <div id="js-preloader" class="js-preloader">
       <div class="preloader-inner">
@@ -60,7 +60,15 @@
                                 </div>
                             </li>
                             <li><a href="/contact" class="{% if 'contact' in request.path %}active{% endif %}">Contact</a></li></li>
-                        </ul>        
+                            {% if user.is_authenticated %}
+                            <li><a href="/signout" class="{% if 'signout' in request.path %}active{% endif %}">SignOut</a></li>
+                            {% if user.is_superuser %}
+                                <li><a href="/dashboard" class="{% if 'dashboard' in request.path %}active{% endif %}">Dashboard</a></li>
+                            {% endif %}
+                            {% else %}
+                            <li><a href="/signin" class="{% if 'signin' in request.path %}active{% endif %}">Signin</a></li></li>
+                            {% endif %}
+                        </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>
                         </a>
@@ -110,6 +118,7 @@
     
     <!-- Global Init -->
     <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/function.js' %}"></script>
 
   </body>
 </html>
